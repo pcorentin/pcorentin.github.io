@@ -1,15 +1,19 @@
+
+
+
 //grid width and height
 var bw = 400;
 var bh = 400;
 //padding around grid
-var p = 10;
+var p = 0;
 //size of canvas
 var cw = bw + (p*2) + 1;
 var ch = bh + (p*2) + 1;
 
-var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
 
-var context = canvas.get(0).getContext("2d");
+var context = $("#game").get(0).getContext("2d");
+context.canvas.height = ch;
+context.canvas.width = cw;
 
 function drawBoard(){
     for (var x = 0; x <= bw; x += 40) {
@@ -27,4 +31,3 @@ function drawBoard(){
     context.stroke();
 }
 
-drawBoard();
