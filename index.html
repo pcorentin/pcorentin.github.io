@@ -6,19 +6,72 @@
       <script src="player.js"></script>
 </head>
 
-    <body>
+    <body >
         <canvas id="game"></canvas>
     </body>
     <script src='grid.js'> </script>
     <script>
-                var xPos = 200;
-                var yPos = 200;
-                var radius = 10;
-                var color = "red"
 
-               var player = new Player(xPos,yPos,radius,color)
-              drawBoard();
-              drawPlayer(player);
+              var xPos = 200;
+              var yPos = 200;
+              var radius = 10;
+              var color = "red"
+              var player = new Player(xPos,yPos,radius,color)
+              var offset = canvas.offset();
+              
+// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+ 
+// requestAnimationFrame polyfill by Erik Möller
+// fixes from Paul Irish and Tino Zijdel
+ 
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+
+              init(); 
+              animate();
+
+              function init() {
+                drawBoard();
+              }
+
+              function animate() {
+                requestAnimationFrame( animate );
+                draw();
+              } 
+
+              function draw() {  
+                  clearGrid();
+                  drawBoard();   
+                  drawPlayer(player);
+              }
+
+              canvas.mousemove(function( event ) {
+                  player.xPos = event.pageX-offset.left;
+                  player.yPos = event.pageY - offset.top;
+});
 
     </script>
 </html>
