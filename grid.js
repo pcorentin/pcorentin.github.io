@@ -10,7 +10,7 @@ var p = 0;
 var cw = bw + (p*2) + 1;
 var ch = bh + (p*2) + 1;
 
-
+var canvas = $("#game");
 var context = $("#game").get(0).getContext("2d");
 context.canvas.height = ch;
 context.canvas.width = cw;
@@ -30,4 +30,14 @@ function drawBoard(){
     context.strokeStyle = "black";
     context.stroke();
 }
+
+function drawPlayer(player) {
+canvas.drawArc({
+  fillStyle: player.color,
+  x: player.xPos, y: player.yPos,
+  radius: player.radius
+});
+}
+
+
 

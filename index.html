@@ -2,7 +2,8 @@
     <head>
       <link rel="stylesheet" type="text/css" href="grid.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      
+      <script src="jcanvas.min.js"></script>
+      <script src="player.js"></script>
 </head>
 
     <body>
@@ -10,8 +11,14 @@
     </body>
     <script src='grid.js'> </script>
     <script>
+                var xPos = 200;
+                var yPos = 200;
+                var radius = 10;
+                var color = "red"
 
+               var player = new Player(xPos,yPos,radius,color)
               drawBoard();
+              drawPlayer(player);
 
     </script>
 </html>
