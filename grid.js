@@ -40,58 +40,30 @@ context.closePath();
     context.stroke();
 }
 
-function drawPlayer(player) {
 
-canvas.drawArc({
-  fillStyle: player.color,
-  x: player.xPos, y: player.yPos,
-  radius: player.radius
-});
-
-}
 
 function clearGrid() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
-function getRandomPosition() {
 
-    // make position sensitive to size and document's width
-    var posx = (Math.random() * bw ).toFixed();
-    var posy = (Math.random() * bh ).toFixed();
-    return {posx:posx,posy:posy};
-}
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+
 
 function initPellets() {
     for (var x = 0; x <= nPellets; x += 1) {
         var coor = getRandomPosition()
         var color = getRandomColor()
-        canvas.drawArc({
-            fillStyle: color,
-          x: coor.posx ,y: coor.posy,
-        radius: rPellet
-});
-        pellets.push({pos:coor,color:color, radius:rPellet})
+        var cell = new Cell(coor.posx,coor.posy,rPellet,color);
+        cell.draw(canvas);
+        pellets.push(cell)
 
     }
 }
 
 function drawPellets() {
     pellets.forEach ( function (pellet){
-        canvas.drawArc({
-            fillStyle: pellet.color,
-          x: pellet.pos.posx ,y: pellet.pos.posy,
-        radius: pellet.radius
-});
+        pellet.draw(canvas);
     });
 
   }
