@@ -15,11 +15,6 @@
     </body>
     <script src='grid.js'> </script>
     <script>
-              var xPos = 200;
-              var yPos = 200;
-              var radius = 10;
-              var color = "red";
-              var player = new Player(xPos,yPos,radius,color);
               var offset = canvas.offset();
               
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -57,6 +52,7 @@
               animate();
 
               function init() {
+                initPlayer();
                 drawBoard();
                 initPellets();
               }
@@ -67,15 +63,15 @@
               } 
 
               function draw() {  
-                  collisions([player],pellets);
+                  collisions(players,pellets);
                   clearGrid();
                   drawBoard();                   
-                  drawPellets();
-                  player.draw(canvas);
+                  drawCells(pellets);
+                  drawCells(players);
               }
 
               canvas.mousemove(function( event ) {
-                  player.move(event.pageX-offset.left, event.pageY - offset.top);
+                  players[0].move(event.pageX-offset.left, event.pageY - offset.top);
 });
 
     </script>

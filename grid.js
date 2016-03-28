@@ -11,9 +11,12 @@ var cw = bw + (p*2) + 1;
 var ch = bh + (p*2) + 1;
 
 //pellet radius
-var mass = 5;
+var massPellet = 5;
+var massPlayer = 10;
+var nDecepticons = 3;
 var nPellets = 20;
 var pellets = [];
+var players = [];
 
 var canvas = $("#game");
 var context = $("#game").get(0).getContext("2d");
@@ -49,24 +52,37 @@ function clearGrid() {
 
 
 
+function initPlayer() {
+    var xPos = bw/2;
+    var yPos = bh/2;
+    var radius = 10;
+    var color = getRandomColor();
+    players.push(new Player(xPos,yPos,radius,color));
+    initDecepticons();
+}
 
+function initDecepticons() {
+    for (var x = 0; x <= nDecepticons; x += 1) {
+        addOneCell(massPlayer, players, Player);
+    }  
+}
 
 function initPellets() {
     for (var x = 0; x <= nPellets; x += 1) {
-        addOnePellet();
+        addOneCell(massPellet, pellets, Cell);
     }
 }
 
-function addOnePellet() {
+function addOneCell(mass,cells, type) {
         var coor = getRandomPosition();
         var color = getRandomColor();
-        var cell = new Cell(coor.posx,coor.posy,mass,color);
+        var cell = new type(coor.posx,coor.posy,mass,color);
         cell.draw(canvas);
-        pellets.push(cell);
+        cells.push(cell);
 }
 
-function drawPellets() {
-    pellets.forEach ( function (pellet){
+function drawCells(cells) {
+    cells.forEach ( function (pellet){
         pellet.draw(canvas);
     });
 
