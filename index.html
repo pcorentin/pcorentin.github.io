@@ -60,6 +60,7 @@
               function animate() {
                 requestAnimationFrame( animate );
                 draw();
+                computeMoves();
               } 
 
               function draw() {  
@@ -71,7 +72,7 @@
               }
 
               canvas.mousemove(function( event ) {
-                  players[0].move(event.pageX-offset.left, event.pageY - offset.top);
+                  players[0].moveTo(event.pageX-offset.left, event.pageY - offset.top);
 });
 
     </script>

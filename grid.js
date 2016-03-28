@@ -14,7 +14,7 @@ var ch = bh + (p*2) + 1;
 var massPellet = 5;
 var massPlayer = 10;
 var nDecepticons = 3;
-var nPellets = 20;
+var nPellets = 100;
 var pellets = [];
 var players = [];
 
