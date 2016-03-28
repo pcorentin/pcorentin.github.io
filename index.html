@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
+      <title>Merge cell</title>
       <link rel="stylesheet" type="text/css" href="grid.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
       <script src="jcanvas.min.js"></script>
@@ -13,12 +15,11 @@
     </body>
     <script src='grid.js'> </script>
     <script>
-
               var xPos = 200;
               var yPos = 200;
               var radius = 10;
-              var color = "red"
-              var player = new Player(xPos,yPos,radius,color)
+              var color = "red";
+              var player = new Player(xPos,yPos,radius,color);
               var offset = canvas.offset();
               
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -32,8 +33,8 @@
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || 
+          window[vendors[x]+'CancelRequestAnimationFrame'];
     }
  
     if (!window.requestAnimationFrame)
@@ -57,7 +58,7 @@
 
               function init() {
                 drawBoard();
-                initPellets()
+                initPellets();
               }
 
               function animate() {
@@ -66,11 +67,11 @@
               } 
 
               function draw() {  
-                  collisions([player],pellets)
+                  collisions([player],pellets);
                   clearGrid();
                   drawBoard();                   
                   drawPellets();
-                  player.draw(canvas)
+                  player.draw(canvas);
               }
 
               canvas.mousemove(function( event ) {

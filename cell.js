@@ -1,7 +1,8 @@
-function Cell (xPos,yPos,radius,color) {
+function Cell (xPos,yPos,mass,color) {
     this.xPos = xPos;
     this.yPos = yPos;
-    this.radius = radius;
+    this.mass  = mass;
+    this.radius = this.getRadius();
     this.color = color;
 }
 
@@ -11,7 +12,7 @@ Cell.prototype.draw = function(canvas) {
           x: this.xPos ,y: this.yPos,
         radius: this.radius
 });
-}
+};
 
 Cell.prototype.collideWith = function(cell) {
   var dx = this.xPos - cell.xPos;
@@ -21,10 +22,14 @@ Cell.prototype.collideWith = function(cell) {
     return true;
   }
   return false; 
-}
+};
 
 Cell.prototype.mergeWith = function(cell) {
-  this.radius = this.radius + cell.radius;
-}
+  this.mass = this.mass + cell.mass;
+  this.radius = this.getRadius();
+};
 
+Cell.prototype.getRadius = function() {
+  return Math.sqrt(this.mass);
+};
 

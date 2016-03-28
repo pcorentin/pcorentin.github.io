@@ -22,8 +22,9 @@ function collisions( players, pellets) {
     for ( var y = 0 ; y < pellets.length; y++) {
       for ( var i =0 ; i < players[x].cells.length ; i++) {
         if (currentPlayer.cells[i].collideWith(pellets[y])) {
-          currentPlayer.cells[i].mergeWith(pellets[y])
-          pellets.splice(y,1)
+          currentPlayer.cells[i].mergeWith(pellets[y]);
+          pellets.splice(y,1);
+          addOnePellet();
         }
       }
     }

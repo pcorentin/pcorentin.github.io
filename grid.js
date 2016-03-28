@@ -11,9 +11,9 @@ var cw = bw + (p*2) + 1;
 var ch = bh + (p*2) + 1;
 
 //pellet radius
-var rPellet = 5
-var nPellets = 20
-var pellets = []
+var mass = 5;
+var nPellets = 20;
+var pellets = [];
 
 var canvas = $("#game");
 var context = $("#game").get(0).getContext("2d");
@@ -22,6 +22,7 @@ context.canvas.width = cw;
 context.globalCompositeOperation = 'destination-over';
 
 
+ 
 
 function drawBoard(){
     context.beginPath();
@@ -31,7 +32,7 @@ function drawBoard(){
     }
 
 
-    for (var x = 0; x <= bh; x += 40) {
+    for (x = 0; x <= bh; x += 40) {
         context.moveTo(p, 0.5 + x + p);
         context.lineTo(bw + p, 0.5 + x + p);
     }
@@ -52,13 +53,16 @@ function clearGrid() {
 
 function initPellets() {
     for (var x = 0; x <= nPellets; x += 1) {
-        var coor = getRandomPosition()
-        var color = getRandomColor()
-        var cell = new Cell(coor.posx,coor.posy,rPellet,color);
-        cell.draw(canvas);
-        pellets.push(cell)
-
+        addOnePellet();
     }
+}
+
+function addOnePellet() {
+        var coor = getRandomPosition();
+        var color = getRandomColor();
+        var cell = new Cell(coor.posx,coor.posy,mass,color);
+        cell.draw(canvas);
+        pellets.push(cell);
 }
 
 function drawPellets() {
